@@ -1,3 +1,36 @@
+// FILE STRUCTURE : 
+
+// usa-traffic-light-simulation/
+// │
+// ├── src/
+// │   ├── main.c
+// │   ├── traffic_light.c
+// │   ├── traffic_light.h
+// │   ├── simulation.c
+// │   ├── simulation.h
+// │   ├── user_interface.c
+// │   ├── user_interface.h
+// │   ├── utils.c
+// │   └── utils.h
+// │
+// ├── include/
+// │   └── config.h
+// │
+// ├── tests/
+// │   ├── test_traffic_light.c
+// │   └── test_simulation.c
+// │
+// ├── docs/
+// │   ├── README.md
+// │   └── USAGE.md
+// │
+// ├── Makefile
+// └── .gitignore
+
+
+
+
+
 #include <stdio.h>
 #include "config.h"
 #include "traffic_light.h"
