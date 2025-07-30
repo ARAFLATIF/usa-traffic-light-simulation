@@ -12,4 +12,10 @@ int getRandomNumber(int min, int max);
 // Utility function to simulate a delay in milliseconds
 void delay(int milliseconds);
 
+// Utility function to initialize random seed
+void initializeRandomSeed();
+
+// Utility function to clear input buffer
+void clearInputBuffer();
+
 #endif // UTILS_H
