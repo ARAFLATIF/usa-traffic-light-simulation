@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
-#include "traffic_light.h"
-#include "config.h"
+#include "../src/traffic_light.h"
+#include "../include/config.h"
 
 // Test initialization of traffic lights
 void testInitializeTrafficLights() {
@@ -22,12 +22,12 @@ void testInitializeTrafficLights() {
 // Test state transitions of a traffic light
 void testUpdateTrafficLightState() {
     TrafficLight light;
-    initializeTrafficLights(&light, 1); // Initialize a single light
+    initializeTrafficLight(&light, 1); // Initialize a single light
 
     // Simulate a transition from RED to GREEN
     light.currentState = RED;
     light.remainingTime = 0;
-    updateTrafficLightState(&light);
+    updateTrafficLight(&light);
 
     assert(light.currentState == GREEN);
     assert(light.remainingTime == DEFAULT_GREEN_DURATION);
@@ -35,7 +35,7 @@ void testUpdateTrafficLightState() {
     // Simulate a transition from GREEN to YELLOW
     light.currentState = GREEN;
     light.remainingTime = 0;
-    updateTrafficLightState(&light);
+    updateTrafficLight(&light);
 
     assert(light.currentState == YELLOW);
     assert(light.remainingTime == DEFAULT_YELLOW_DURATION);
@@ -43,7 +43,7 @@ void testUpdateTrafficLightState() {
     // Simulate a transition from YELLOW to RED
     light.currentState = YELLOW;
     light.remainingTime = 0;
-    updateTrafficLightState(&light);
+    updateTrafficLight(&light);
 
     assert(light.currentState == RED);
     assert(light.remainingTime == DEFAULT_RED_DURATION);
