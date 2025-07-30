@@ -39,6 +39,9 @@
 #include "utils.h"
 
 int main() {
+    // Initialize random seed for better randomness
+    initializeRandomSeed();
+    
     // Display the welcome message
     displayWelcomeMessage();
 
@@ -60,7 +63,11 @@ int main() {
 
         // Get the user's choice
         int userChoice;
-        scanf("%d", &userChoice);
+        while (scanf("%d", &userChoice) != 1) {
+            printf("Invalid input! Please enter a number: ");
+            clearInputBuffer();
+        }
+        clearInputBuffer(); // Clear any remaining input
 
         // Handle the user's menu choice
         switch (userChoice) {
