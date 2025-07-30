@@ -19,4 +19,7 @@ void adjustTrafficLightDurations(TrafficLight lights[], int numLights, int traff
 // Handle pedestrian crossing requests during the simulation
 void handlePedestrianRequests(TrafficLight lights[], int numLights);
 
+// Main simulation function called from main.c
+void runSimulation(TrafficLight lights[], int numLights, int trafficFlowLevel, int debugMode);
+
 #endif // SIMULATION_H
