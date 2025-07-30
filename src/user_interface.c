@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "user_interface.h"
 #include "config.h" // Include configuration for default values and thresholds
+#include "utils.h"  // Include utility functions
 
 // Display a welcome message to the user
 void displayWelcomeMessage() {
@@ -29,43 +30,58 @@ int getUserTrafficFlowLevel() {
     printf("2. Normal Traffic\n");
     printf("3. High Traffic\n");
     printf("Enter your choice (1-3): ");
-    scanf("%d", &choice);
-
-    // Validate input
-    if (choice < 1 || choice > 3) {
-        printf("Invalid choice! Defaulting to Normal Traffic.\n");
-        return 2; // Default to Normal Traffic
+    
+    while (scanf("%d", &choice) != 1 || choice < 1 || choice > 3) {
+        printf("Invalid choice! Please enter a number between 1 and 3: ");
+        clearInputBuffer();
     }
+    clearInputBuffer(); // Clear any remaining input
+    
     return choice;
 }
 
 // Display the current status of all traffic lights
 void displayTrafficLightStatus(const TrafficLight lights[], int numLights) {
-    printf("\nTraffic Light Status:\n");
+    printf("\n=== Traffic Light Status ===\n");
     for (int i = 0; i < numLights; i++) {
-        printf("Light %d: %s (Time Remaining: %d seconds)\n", 
-               lights[i].id, 
-               lights[i].state == RED ? RED_STATE_NAME :
-               lights[i].state == GREEN ? GREEN_STATE_NAME : YELLOW_STATE_NAME,
-               lights[i].remainingTime);
+        const char* stateColor = "";
+        const char* stateName = "";
+        
+        // Add visual indicators for better demo
+        switch (lights[i].currentState) {
+            case RED:
+                stateColor = "[RED]";
+                stateName = RED_STATE_NAME;
+                break;
+            case GREEN:
+                stateColor = "[GREEN]";
+                stateName = GREEN_STATE_NAME;
+                break;
+            case YELLOW:
+                stateColor = "[YELLOW]";
+                stateName = YELLOW_STATE_NAME;
+                break;
+        }
+        
+        printf("Light %d: %s %s (Time Remaining: %d seconds)\n", 
+               lights[i].id, stateColor, stateName, lights[i].remainingTime);
     }
+    printf("=============================\n");
 }
 
 // Ask the user if they want to enable debug mode
 int askEnableDebugMode() {
     char choice;
     printf("\nDo you want to enable debug mode? (y/n): ");
-    scanf(" %c", &choice);
+    
+    while (scanf(" %c", &choice) != 1 || (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N')) {
+        printf("Invalid input! Please enter 'y' for yes or 'n' for no: ");
+        clearInputBuffer();
+    }
+    clearInputBuffer(); // Clear any remaining input
 
     // Return 1 for "yes" and 0 for "no"
-    if (choice == 'y' || choice == 'Y') {
-        return 1;
-    } else if (choice == 'n' || choice == 'N') {
-        return 0;
-    } else {
-        printf("Invalid input! Defaulting to debug mode OFF.\n");
-        return 0; // Default to debug mode off
-    }
+    return (choice == 'y' || choice == 'Y') ? 1 : 0;
 }
 
 // Notify the user of a pedestrian crossing request
