@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
-#include "traffic_light.h"
-#include "config.h"
+#include "../src/traffic_light.h"
+#include "../include/config.h"
 
 // Test initialization of traffic lights
 void testInitializeTrafficLights() {
